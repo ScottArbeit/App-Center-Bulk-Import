@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "msacbulkimport": {
+      "commandName": "Project",
+      "commandLineArgs": "--organization Scotts-org --organizationrole member --apitoken 3e81ebbdcad9185d6e5e7d41314597637fc3f0a3 --inputFile C:\\Intel\\users.txt"
+    }
+  }
+}

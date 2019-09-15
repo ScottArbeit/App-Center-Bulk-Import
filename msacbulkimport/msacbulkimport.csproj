@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Authors>Scott Arbeit</Authors>
+    <Company>Microsoft</Company>
+    <Product>Microsoft App Center</Product>
+    <Description>Microsoft App Center Bulk Import utility - for importing a list of users to organizations and teams.</Description>
+  </PropertyGroup>
+
+</Project>
