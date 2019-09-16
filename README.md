@@ -7,7 +7,7 @@ msacbulkimport is a .NET Core utility that allows users to import multiple users
 It is intended as a demo for how to use the App Center REST API for account management. No warranties about its correctness or performance are offered, but best-effort has been made to ensure that it runs correctly.
 
 ### Building the code
-msacbulkimport uses .NET Core 3.0 Preview 9, which you can download from [dot.net](https://dotnet.microsoft.com/download/dotnet-core/3.0). Build the project by running
+msacbulkimport uses .NET Core 3.0, which you can download from [dot.net](https://dotnet.microsoft.com/download/dotnet-core/3.0). Build the project by running
 
     dotnet build msacbulkimport.csproj
 
