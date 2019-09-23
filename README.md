@@ -33,12 +33,12 @@ All output is shown in the terminal window, and also written to an output file. 
 
 ### Examples:
 
-Invite users to an organization:
+**Invite users to an organization:**
 
     msacbulkimport --apitoken <myApiToken> --organization MyOrganizationName --organizationrole member --inputfile C:\MyPath\userfile.txt
 
 
-Invite users to a team (they must already be in the organization):
+**Invite users to a team (*they must already be in the organization*):**
 
     msacbulkimport --apitoken <myApiToken> --organization MyOrganizationName --team MyTeamName --teamrole member --inputfile C:\MyPath\userfile.txt
 
