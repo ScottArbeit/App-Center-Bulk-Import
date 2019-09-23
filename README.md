@@ -35,13 +35,44 @@ All output is shown in the terminal window, and also written to an output file. 
 
 **Invite users to an organization:**
 
-    msacbulkimport --apitoken <myApiToken> --organization MyOrganizationName --organizationrole member --inputfile C:\MyPath\userfile.txt
+    msacbulkimport --apitoken <myApiToken> --organization My-Organization-Name --organizationrole member --inputfile C:\MyPath\userfile.txt
 
+Sample output:
+
+```
+>.\msacbulkimport.exe --organization Scotts-org --organizationrole member --inputfile C:\MyPath\users.txt --apitoken XXX
+
+msacbulkimport - Microsoft App Center Bulk Import utility
+
+Tester1@scottarbeit.com: Sent invitation to join organization.
+Tester2@scottarbeit.com: Sent invitation to join organization.
+ProgramManager1@scottarbeit.com: Sent invitation to join organization.
+ProgramManager2@scottarbeit.com: Sent invitation to join organization.
+notvalid: Error: doesn't appear to be a valid email address.
+notvalid@notvalid: Error: doesn't appear to be a valid email address.
+msacpm1@outlook.com: Sent invitation to join organization.
+
+Done.
+```
 
 **Invite users to a team (*they must already be in the organization*):**
 
-    msacbulkimport --apitoken <myApiToken> --organization MyOrganizationName --team MyTeamName --teamrole member --inputfile C:\MyPath\userfile.txt
+    msacbulkimport --apitoken <myApiToken> --organization My-Organization-Name --team My-Team-Name --teamrole member --inputfile C:\MyPath\userfile.txt
 
+Sample output (with one user who has not accepted the invitation to join the organization):
+
+```
+>.\msacbulkimport.exe --organization Scotts-org --team "Team-1" --teamrole member --inputfile C:\MyPath\teammembers.txt --apitoken XXX
+
+msacbulkimport - Microsoft App Center Bulk Import utility
+
+msacpm1@outlook.com: Added team member.
+Tester1@scottarbeit.com: Error: failed to add team member; {"error":{"code":"BadRequest","message":"The user with the email \"Tester1@scottarbeit.com\" is not a member of the organization \"Scotts-Org\""}}
+notvalid: Error: doesn't appear to be a valid email address.
+notvalid@notvalid: Error: doesn't appear to be a valid email address.
+
+Done.
+```
 
 Show help:
 
@@ -54,11 +85,11 @@ Show help:
 
   `--inputfile` _(required)_ The name of the file containing email addresses of users to import
 
-  `--organization` _(required)_ The name of your organization
+  `--organization` _(required)_ The name of your organization (i.e. the slug used in AppCenter URL's)
 
   `--organizationrole` The organization role for new collaborators; either admin, collaborator, or member
 
-  `--team` The name of the team, if adding team members
+  `--team` The name of the team (i.e. the slug used in AppCenter URL's), if adding team members
 
   `--teamrole` The team role for new team members; either admin, collaborator, or member
 
@@ -66,4 +97,3 @@ Show help:
 
   `--help | /?` Show help message
 
-_Note:_ If there are spaces in a parameter, wrap it in "".

@@ -90,7 +90,7 @@ namespace msacbulkimport
                             {
                                 // We're inviting users to an organization.
                                 string content = $"{{\"user_email\":\"{emailAddress}\", \"role\":\"{organizationRole}\" }}";
-                                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"orgs/{organization}/invitations")
+                                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"orgs/{Uri.EscapeDataString(organization)}/invitations")
                                 {
                                     Content = new StringContent(content, Encoding.UTF8, "application/json")
                                 };
@@ -109,7 +109,7 @@ namespace msacbulkimport
                             {
                                 // We're adding users as team members.
                                 string content = $"{{\"user_email\":\"{emailAddress}\", \"role\":\"{teamRole}\" }}";
-                                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"orgs/{organization}/teams/{team}/users")
+                                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"orgs/{Uri.EscapeDataString(organization)}/teams/{Uri.EscapeDataString(team)}/users")
                                 {
                                     Content = new StringContent(content, Encoding.UTF8, "application/json")
                                 };
@@ -189,29 +189,27 @@ namespace msacbulkimport
 
         private static void ShowHelp()
         {
+            Console.WriteLine("Examples:");
+            Console.WriteLine("---------");
+            Console.WriteLine("Invite users to an organization:");
+            Console.WriteLine($"msacbuildimport {Parameters.ApiToken} <myApiToken> {Parameters.Organization} My-Organization-Name {Parameters.OrganizationRole} member {Parameters.InputFile} C:\\MyPath\\userfile.txt");
+            Console.WriteLine();
+            Console.WriteLine("Invite users to a team (they must already be in the organization):");
+            Console.WriteLine($"msacbuildimport {Parameters.ApiToken} <myApiToken> {Parameters.Organization} My-Organization-Name {Parameters.Team} My-Team-Name {Parameters.TeamRole} member {Parameters.InputFile} C:\\MyPath\\userfile.txt");
+            Console.WriteLine();
+            Console.WriteLine("Show help:");
+            Console.WriteLine($"msacbulkimport {Parameters.Help1} or msacbulkimport {Parameters.Help2}");
+            Console.WriteLine();
             Console.WriteLine("Parameters:");
             Console.WriteLine("-----------");
             Console.WriteLine($"  {Parameters.ApiToken}: (required) The API token for your organization");
             Console.WriteLine($"  {Parameters.InputFile}: (required) The name of the file containing email addresses of users to import");
-            Console.WriteLine($"  {Parameters.Organization}: (required) The name of your organization");
+            Console.WriteLine($"  {Parameters.Organization}: (required) The name of your organization (i.e. the slug used in AppCenter URL's)");
             Console.WriteLine($"  {Parameters.OrganizationRole}: The organization role for new collaborators; either admin, collaborator, or member");
-            Console.WriteLine($"  {Parameters.Team}: The name of the team, if adding team members");
+            Console.WriteLine($"  {Parameters.Team}: The name of the team (i.e. the slug used in AppCenter URL's), if adding team members");
             Console.WriteLine($"  {Parameters.TeamRole}: The team role for new team members; either admin, collaborator, or member");
             Console.WriteLine($"  {Parameters.OutputFile}: The name of the output file; default is bulkimportresult.txt");
             Console.WriteLine($"  {Parameters.Help1} | {Parameters.Help2}: Show this help message");
-            Console.WriteLine();
-            Console.WriteLine("Note: If there are spaces in a parameter, wrap it in \"\".");
-            Console.WriteLine();
-            Console.WriteLine("Examples:");
-            Console.WriteLine("---------");
-            Console.WriteLine("Invite users to an organization:");
-            Console.WriteLine($"msacbuildimport {Parameters.ApiToken} <myApiToken> {Parameters.Organization} MyOrganizationName {Parameters.OrganizationRole} member {Parameters.InputFile} C:\\MyPath\\userfile.txt");
-            Console.WriteLine();
-            Console.WriteLine("Invite users to a team (they must already be in the organization):");
-            Console.WriteLine($"msacbuildimport {Parameters.ApiToken} <myApiToken> {Parameters.Organization} MyOrganizationName {Parameters.Team} MyTeamName {Parameters.TeamRole} member {Parameters.InputFile} C:\\MyPath\\userfile.txt");
-            Console.WriteLine();
-            Console.WriteLine("Show help:");
-            Console.WriteLine($"msacbulkimport {Parameters.Help1} or msacbulkimport {Parameters.Help2}");
             Console.WriteLine();
         }
     }
